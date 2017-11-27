@@ -1,6 +1,5 @@
-import requests
 from bs4 import BeautifulSoup
-import getpass
+
 
 # Get inputs that have a specific name.
 def get_specific_name_input(inputs, names):
@@ -41,13 +40,3 @@ def signin(session, id, pw):
         print("Login Success")
     else:
         print(str(login_response.status_code) + ": " + str(login_response.reason))
-
-
-def crawl():
-    with requests.session() as session:
-        signin(session, id=input('id: '), pw=getpass.getpass('password: '))
-
-
-    # news_feed = soup.find_all(class_='news')
-    # print(news_feed)
-
