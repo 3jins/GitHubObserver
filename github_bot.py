@@ -55,35 +55,36 @@ class GitHubCrawl:
 
     def crawl_feed(self, feeds, num_feeds_save):
         feed_list = []
-        for no, feed in enumerate(feeds):
-            if no < 5:  # meaningless divisors
-                continue
-            elif no > 7 + num_feeds_save:  # too many feeds
-                break
-            try:
-                feed_info = {}
-                tag = feed['class']
-                soup = BeautifulSoup(str(feed), "html.parser")
-                anchors = soup.find_all('a')
-                feed_info['tag'] = tag[0]
-                for no, anchor in enumerate(anchors):
-                    if no == 0:
-                        soup = BeautifulSoup(str(anchor), "html.parser")
-                        images = soup.find_all('img')
-                        for image in images:
-                            feed_info['icon'] = image['src']
-                    elif no == 1:
-                        soup = BeautifulSoup(str(anchor), "html.parser")
-                        strings = soup.stripped_strings
-                        for string in strings:
-                            feed_info['user_name'] = string
-                    elif no == 2:
-                        feed_info['link'] = "https://github.com" + str(anchor['href'])
-                    else:
-                        feed_info['original_link'] = "https://github.com" + str(anchor['href'])
-                feed_list.append(feed_info)
-            except TypeError:
-                continue
+        if len(feeds) > 0:
+            for no, feed in enumerate(feeds):
+                if no < 5:  # meaningless divisors
+                    continue
+                elif no > 7 + num_feeds_save:  # too many feeds
+                    break
+                try:
+                    feed_info = {}
+                    tag = feed['class']
+                    soup = BeautifulSoup(str(feed), "html.parser")
+                    anchors = soup.find_all('a')
+                    feed_info['tag'] = tag[0]
+                    for no, anchor in enumerate(anchors):
+                        if no == 0:
+                            soup = BeautifulSoup(str(anchor), "html.parser")
+                            images = soup.find_all('img')
+                            for image in images:
+                                feed_info['icon'] = image['src']
+                        elif no == 1:
+                            soup = BeautifulSoup(str(anchor), "html.parser")
+                            strings = soup.stripped_strings
+                            for string in strings:
+                                feed_info['user_name'] = string
+                        elif no == 2:
+                            feed_info['link'] = "https://github.com" + str(anchor['href'])
+                        else:
+                            feed_info['original_link'] = "https://github.com" + str(anchor['href'])
+                    feed_list.append(feed_info)
+                except TypeError:
+                    continue
         return feed_list
 
     def crawl(self):
