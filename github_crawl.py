@@ -1,12 +1,12 @@
 from bs4 import BeautifulSoup
 
 
-def crawl_feed(feeds):
+def crawl_feed(feeds, num_feeds_save):
     feed_list = []
     for no, feed in enumerate(feeds):
         if no < 5:      # meaningless divisors
             continue
-        elif no > 10:   # too many feeds
+        elif no > 7 + num_feeds_save:   # too many feeds
             break
         try:
             feed_info = {}
@@ -42,6 +42,6 @@ def crawl(session):
     soup = BeautifulSoup(source_code.text, "html.parser")
 
     newsfeed = soup.find('div', class_='news')
-    feed_list = crawl_feed(newsfeed)
+    feed_list = crawl_feed(newsfeed, 3)
 
     return feed_list
