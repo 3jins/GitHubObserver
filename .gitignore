@@ -100,5 +100,8 @@ ENV/
 # mypy
 .mypy_cache/
 
-#Pycharm
+# Pycharm
 .idea/
+
+# crawling data file
+recent_feeds
