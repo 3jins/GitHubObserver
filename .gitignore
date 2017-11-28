@@ -105,3 +105,6 @@ ENV/
 
 # crawling data file
 recent_feeds
+
+# facebookbot account file
+facebookbot_account
