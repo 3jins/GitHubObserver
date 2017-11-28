@@ -1,14 +1,17 @@
 import requests
 import getpass
 
-import github_login
-import github_observe
-import facebook_message
+import github_bot
+import facebook_bot
 
 
 if __name__ == '__main__':
     with requests.session() as session:
-        github_login.signin(session, id=input('id: '), pw=getpass.getpass('password: '))
-        facebook_client = facebook_message.login()
-        print("Put 'quit' to quit the loop.")
-        github_observe.get_new(session, facebook_client)
+        github_login = github_bot.GitHubLogin(session, id=input('id: '), pw=getpass.getpass('password: '))
+        github_login.login()
+        fb_bot = facebook_bot.FacebookBot()
+        fb_bot.login()
+        github_observe = github_bot.GitHubObserve(session, fb_bot)
+        print("\nPut 'quit' to quit the loop.\n")
+
+        github_observe.get_new(session)
