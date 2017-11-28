@@ -1,10 +1,13 @@
 from bs4 import BeautifulSoup
 
+
 def crawl_feed(feeds):
     feed_list = []
     for no, feed in enumerate(feeds):
         if no < 5:      # meaningless divisors
             continue
+        elif no > 10:   # too many feeds
+            break
         try:
             feed_info = {}
             tag = feed['class']
@@ -29,8 +32,8 @@ def crawl_feed(feeds):
             feed_list.append(feed_info)
         except TypeError:
             continue
-
     return feed_list
+
 
 
 def crawl(session):
@@ -40,4 +43,5 @@ def crawl(session):
 
     newsfeed = soup.find('div', class_='news')
     feed_list = crawl_feed(newsfeed)
+
     return feed_list
