@@ -27,12 +27,10 @@ class FacebookBot:
             message += str(feed['user_name'])
             message += str(humanize_tag[feed['tag']][0])
             message += str(feed['link'])
-            message += str(feed['tag'][1])
+            message += str(humanize_tag[feed['tag']][1])
             if 'original_link' in feed:
                 message + str(feed['original_link'])
 
             sent = self.facebook_client.sendMessage(message, thread_id=target.uid)
             if not sent:
                 print("Something in facebook_bot.py goes wrong... :(")
-            else:
-                print("A message is sent.")
