@@ -93,7 +93,7 @@ class GitHubCrawl:
         soup = BeautifulSoup(source_code.text, "html.parser")
 
         newsfeed = soup.find('div', class_='news')
-        feed_list = self.crawl_feed(newsfeed, 3)
+        feed_list = self.crawl_feed(newsfeed, 10)
 
         return feed_list
 
