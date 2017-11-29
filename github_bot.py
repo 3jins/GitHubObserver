@@ -59,7 +59,7 @@ class GitHubCrawl:
             for no, feed in enumerate(feeds):
                 if no < 5:  # meaningless divisors
                     continue
-                elif no > 7 + num_feeds_save:  # too many feeds
+                elif no > 4 + 2 * num_feeds_save:  # too many feeds
                     break
                 try:
                     feed_info = {}
