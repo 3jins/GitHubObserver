@@ -138,7 +138,7 @@ class GitHubObserve:
         else:
             return []
 
-    def get_new(self, facebook_client):
+    def get_new(self, facebook_client, period):
         # Check if there is a new feed
         feed_list = self.github_crawl.crawl()
         updated_feeds = self.compare_feeds(feed_list)
@@ -148,7 +148,7 @@ class GitHubObserve:
             self.fb_bot.send_message(updated_feeds)
 
         # Iterate until a user inputs 'quit'
-        thread = threading.Timer(30, self.get_new, [self.session])
+        thread = threading.Timer(period, self.get_new, [self.session])
         thread.daemon = True
         thread.start()
         while input() != 'quit':
