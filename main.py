@@ -14,4 +14,4 @@ if __name__ == '__main__':
         github_observe = github_bot.GitHubObserve(session, fb_bot)
         print("\nPut 'quit' to quit the loop.\n")
 
-        github_observe.get_new(session, 30)
+        github_observe.get_new(30)
